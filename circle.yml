@@ -1,0 +1,20 @@
+machine:
+  services:
+    - docker
+
+
+compile:
+  override:
+    - bash .ci/build.sh
+
+
+test:
+  override:
+    - bash .ci/test.sh
+
+
+deployment:
+  dockerhub:
+    branch: master
+    commands:
+      - bash .ci/push_dockerhub.sh
