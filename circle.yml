@@ -29,6 +29,5 @@ test:
 
 deployment:
   dockerhub:
-    branch: master
     commands:
       - bash ci/push_dockerhub.sh
