@@ -25,16 +25,16 @@ tensorflow_aws: &tensorflow_aws
   _test: tests/run.sh
   py2_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py2.6
+    baseimg: floydhub/dl-base:2.1.0-py2
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:1.0.0-py3.6
+    baseimg: floydhub/dl-base:2.1.0-py3
   py2.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py2.6
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2
   py3.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:1.0.0-gpu-py3.6
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3
 
 # end of templates
 
@@ -93,17 +93,17 @@ tensorflow_aws: &tensorflow_aws
   # bump cpu base for py36
   py2_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.0.0-py2
+    baseimg: floydhub/dl-base:2.1.0-py2
   py3_aws:
     arch: cpu
-    baseimg: floydhub/dl-base:2.0.0-py3
+    baseimg: floydhub/dl-base:2.1.0-py3
   # bump gpu base for py36 and cudnn6
   py2.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:2.0.0-gpu-py2.12
+    baseimg: floydhub/dl-base:2.1.0-gpu-py2
   py3.gpu_aws:
     arch: gpu
-    baseimg: floydhub/dl-base:2.0.0-gpu-py3.12
+    baseimg: floydhub/dl-base:2.1.0-gpu-py3
 
 
 $render:

@@ -1,11 +1,8 @@
-FROM floydhub/dl-base:1.0.0-gpu-py2.6
+FROM floydhub/dl-base:2.1.0-gpu-py2
 MAINTAINER Floyd Labs "support@floydhub.com"
 
 ARG TENSORFLOW_VERSION=v1.1.0
 ARG KERAS_VERSION=2.0.6
-
-RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch
-WORKDIR /tensorflow
 
 ENV CI_BUILD_PYTHON python
 # Configure the build for our CUDA configuration.
@@ -23,7 +20,10 @@ RUN echo "LIBRARY_PATH=/usr/local/cuda/lib64/stubs:$LIBRARY_PATH" >> /etc/enviro
 # NOTE: This command uses special flags to build an optimized image for AWS machines.
 # This image might *NOT* work on other machines
 # Clean up pip wheel and Bazel cache when done.
-RUN tensorflow/tools/ci_build/builds/configured GPU \
+
+RUN git clone https://github.com/tensorflow/tensorflow.git --branch ${TENSORFLOW_VERSION} --single-branch \
+    && cd tensorflow \
+    && tensorflow/tools/ci_build/builds/configured GPU \
     && bazel build -c opt --copt=-msse3 --copt=-msse4.1 --copt=-msse4.2 --copt=-mavx --copt=-mavx2 \
         --copt=-mfma --config=cuda tensorflow/tools/pip_package:build_pip_package \
     && bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/pip \
