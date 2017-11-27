@@ -1,0 +1,52 @@
+FROM floydhub/dl-base:3.0.0-gpu-py2.16
+MAINTAINER Floyd Labs "support@floydhub.com"
+
+ARG MAGMA_VERSION=2.3.0
+ARG GPU_TARGET=Volta
+
+# install latest git and atlas, TODO: move to base
+RUN sudo add-apt-repository ppa:git-core/ppa -y \
+    && sudo apt-get update \
+    && sudo apt-get install -y git \
+        libatlas-dev \
+        libatlas-base-dev \
+    && apt-get clean \
+    && apt-get autoremove \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /var/cache/apt/archives/*
+
+# install magma, TODO: move to base
+RUN curl http://icl.utk.edu/projectsfiles/magma/downloads/magma-${MAGMA_VERSION}.tar.gz | tar xz \
+    && cd magma-${MAGMA_VERSION} \
+    && cp make.inc-examples/make.inc.atlas ./make.inc \
+    && sed -i 's/##FPIC      = -fPIC/FPIC      = -fPIC/g' make.inc \
+    && sed -i 's/FORT.*//g' make.inc \
+    && sed -i 's/-lifcore //g' make.inc \
+    && sed -i 's/-lgfortran //g' make.inc \
+    && rm testing/lin/magma_z_no_fortran.cpp \
+    && sed -i 's/-lsvml //g' make.inc \
+    && sed -i 's/ isinf/ std::isinf/g' testing/testing_*.cpp \
+    && sed -i 's/ isnan/ std::isnan/g' testing/testing_*.cpp \
+    && export CUDADIR=/usr/local/cuda \
+    && export GPU_TARGET=${GPU_TARGET} \
+    && export LAPACKDIR=/usr/lib/lapack \
+    && export ATLASDIR=/usr/lib \
+    && make -j$(nproc) \
+    && make install \
+    && cd .. && rm -rf magma-${MAGMA_VERSION}
+
+# https://github.com/torch/cutorch/issues/797
+RUN git clone https://github.com/pytorch/pytorch \
+    && cd pytorch \
+    && git checkout 3a5bbc214004c938156f4dda359265d170d3402c \
+    && git submodule update --init \
+    && python setup.py install \
+    && cd .. && rm -rf pytorch /tmp/*
+
+# install torch vision from source for dataloader bug fix
+# ref: https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/issues/63
+RUN git clone https://github.com/pytorch/vision \
+    && cd vision \
+    && git checkout 64862b5a2c23e339f1602f0c3b8392104cc33d40 \
+    && python setup.py install \
+    && cd .. && rm -rf vision /tmp/*

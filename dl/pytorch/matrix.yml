@@ -55,10 +55,19 @@
 
 
 '0.2.0':
-  <<: *0_2_x
-  _version: 0.2.0.post3
+  - <<: *0_2_x
+    _version: 0.2.0.post3
+    _test: tests/test.sh
+    py2.gpu.cuda9cudnn7:
+        _template: pytorch-from-source-0.x.x.jinja
+        arch: gpu
+        baseimg: floydhub/dl-base:3.0.0-gpu-py2.16
+    py3.gpu.cuda9cudnn7:
+        _template: pytorch-from-source-0.x.x.jinja
+        arch: gpu
+        baseimg: floydhub/dl-base:3.0.0-gpu-py3.16
 
 
 $render:
-  - '0.1.12'
+  # - '0.1.12'
   - '0.2.0'
