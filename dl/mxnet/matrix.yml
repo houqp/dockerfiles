@@ -18,19 +18,18 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py2_aws.35
+    baseimg: floydhub/tensorflow:1.12-py2_aws.39
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py3_aws.35
+    baseimg: floydhub/tensorflow:1.12-py3_aws.40
   py2.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu91'
-    baseimg: floydhub/dl-base:3.0.0-gpu-py2.22
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.35
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py2_aws.39
   py3.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu91'
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.40
 
 1.2.0:
   _version: 1.2.0
@@ -38,18 +37,18 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py2_aws.35
+    baseimg: floydhub/tensorflow:1.12-py2_aws.39
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.9.0-py3_aws.35
+    baseimg: floydhub/tensorflow:1.12-py3_aws.40
   py2.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu91'
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py2_aws.35
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py2_aws.39
   py3.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu91'
-    baseimg: floydhub/tensorflow:1.9.0-gpu.cuda9cudnn7-py3_aws.35
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.40
 
 1.3.0:
   _version: 1.3.1

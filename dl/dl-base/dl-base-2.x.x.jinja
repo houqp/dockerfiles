@@ -33,10 +33,14 @@ RUN pip --no-cache-dir install \
         dlib \
         incremental \
         nltk \
-        jupyterlab==0.33.12 \
         gym[atari,box2d,classic_control] \
 {%- if cpver == 'py2' %}
+        jupyterlab==0.33.12
         pattern \
+{%- else %}
+        jupyterlab==0.35.4 \
+        gym-retro \
+        retrowrapper \
 {%- endif %}
         textacy \
         scikit-image \
@@ -54,16 +58,11 @@ RUN pip --no-cache-dir install \
 {%- if arch == 'gpu' %}
         cupy-{{ cuda_version }} \
 {%- endif %}
-{%- if cpver != 'py2' %}
-        gym-retro \
-        retrowrapper \
-{%- endif %}
     && rm -rf /tmp/* /var/tmp/*
 
 
 # Install and Enable jupyter-widgets
-# jupyterlab-manager@0.35 doesn't work on JL v0.31.12
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.36.2
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@0.38
 
 # Install xgboost
 RUN git clone --recursive https://github.com/dmlc/xgboost \
