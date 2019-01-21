@@ -134,12 +134,12 @@ tensorflow_aws: &tensorflow_aws
     baseimg: floydhub/dl-base:3.2.0-py3.40
   py2.gpu.cuda9cudnn7_aws:
     arch: gpu
-    cuda_version: '9.1'
+    cuda_version: '9.2'
     cudnn_version: '7'
     baseimg: floydhub/dl-base:3.2.0-gpu-py2.39
   py3.gpu.cuda9cudnn7_aws:
     arch: gpu
-    cuda_version: '9.1'
+    cuda_version: '9.2'
     cudnn_version: '7'
     baseimg: floydhub/dl-base:3.2.0-gpu-py3.40
 
