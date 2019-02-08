@@ -56,18 +56,18 @@
   _test: tests/run.sh
   py2:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.12.0-py2_aws.39
+    baseimg: floydhub/tensorflow:1.12-py2_aws.39
   py3:
     arch: cpu
-    baseimg: floydhub/tensorflow:1.12.0-py3_aws.40
+    baseimg: floydhub/tensorflow:1.12-py3_aws.40
   py2.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu92'
-    baseimg: floydhub/tensorflow:1.12.0-gpu.cuda9cudnn7-py2_aws.39
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py2_aws.39
   py3.gpu.cuda9cudnn7:
     arch: gpu
     cuda_version: 'cu92'
-    baseimg: floydhub/tensorflow:1.12.0-gpu.cuda9cudnn7-py3_aws.40
+    baseimg: floydhub/tensorflow:1.12-gpu.cuda9cudnn7-py3_aws.40
 
 
 $render:
